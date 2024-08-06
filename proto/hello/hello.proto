@@ -1,0 +1,21 @@
+syntax = "proto3";
+
+package hello;
+
+message HelloRequest {
+    string name = 1;
+    uint32 age = 2;
+}
+
+message HelloResponse {
+    string message = 1;
+}
+
+option go_package = "github.com/fajaramaulana/go-grpc-microservices-proto-repo/protogen/go/hello";
+
+service HelloService {
+    rpc SayHello(HelloRequest) returns (HelloResponse);
+    rpc SayManyHello(stream HelloRequest) returns (HelloResponse);
+    rpc SayHelloToEveryone(stream HelloRequest) returns (HelloResponse) {}
+    rpc SayHelloContinuous(stream HelloRequest) returns (stream HelloResponse) {}
+}
